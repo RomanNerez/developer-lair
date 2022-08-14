@@ -1,0 +1,71 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    container_name: develop-lair-db
+    environment:
+      MYSQL_DATABASE: 'develop_lair'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3307:3306'
+    expose:
+      - '3306'
+    volumes:
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+      - ./mysql/dbdata:/var/lib/mysql
+    networks:
+      - app-network
+  php:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: digitalocean.com/php
+    container_name: develop-lair-app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: php
+      SERVICE_TAGS: php
+    working_dir: /var/www
+    networks:
+      - app-network
+    volumes:
+      - ./:/var/www
+      - ./php/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: develop-lair-phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+      - UPLOAD_LIMIT=300M
+    networks:
+      - app-network
+
+    #Nginx Service
+  nginx:
+    image: nginx:alpine
+    container_name: develop-lair-nginx
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./nginx/logs/:/var/log/nginx/
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+volumes:
+  db-data:
+  develop-lair:
