@@ -11,7 +11,7 @@
             margin: 0 auto;
         }
         .area-canvas canvas {
-            border: 1px solid #000000;
+            box-shadow: 0 0 2px 1px #c3c3c3;
         }
         .custom-navbar {
             border: 1px solid #000000;
@@ -39,8 +39,8 @@
                 <div class="pt-1">
                     <div class="row mx-0">
                         <div class="col">
+                            <button class="btn btn-primary btn-sm" style="width: 100%" id="preview-image">Preview Image</button>
                             <div id="change-size" class="dropdown">
-                                <button class="btn btn-secondary btn-sm" style="width: 100%" id="generate">Generate Image</button>
                                 <button class="btn btn-secondary btn-sm dropdown-toggle mt-2" style="width: 100%" type="button" data-toggle="dropdown" aria-expanded="false">
                                     Change size area
                                 </button>
@@ -64,6 +64,7 @@
                                     <a class="dropdown-item" href="#" data-type="image">Image</a>
                                 </div>
                             </div>
+                            <button class="btn btn-secondary btn-sm mt-2" style="width: 100%" id="generate">Generate Image</button>
                         </div>
                     </div>
                     <div id="info-data-element" class="d-none">

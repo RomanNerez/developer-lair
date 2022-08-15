@@ -6,6 +6,7 @@ import { defaultDataElement } from "./defaultDataElement"
 import { TEXTBOX_TYPE } from "./constants"
 import UploadImageModal from "./UploadImageModal";
 import { getNewWidthAndHeight } from "../../utils/helpers";
+import {generateImage, previewImage} from "./method-api";
 
 (function () {
   //===== Interface for Elements ========
@@ -29,6 +30,12 @@ import { getNewWidthAndHeight } from "../../utils/helpers";
     width: 640,
     height: 360
   })
+
+  canvasFabric.setBackgroundColor({
+    source: '/images/bg.png',
+    repeat: 'repeat',
+    id: 'test'
+  }, canvasFabric.renderAll.bind(canvasFabric));
 
   canvasFabric.on({
     'selection:cleared': function () {
@@ -58,26 +65,33 @@ import { getNewWidthAndHeight } from "../../utils/helpers";
     }
   })
 
-  $('#generate').on('click', function () {
+  function getAllData() {
       const fabricData = JSON.parse(JSON.stringify(canvasFabric))
-      canvasFabric.getObjects().forEach((klass) => {
-          console.log(klass.toObject())
-      })
-      axios.post('/image/generate', {
+      return {
           width: canvasFabric.getWidth(),
           height: canvasFabric.getHeight(),
           fabric_data: fabricData
-      },
-          { responseType: 'blob' })
-      .then((res) => {
-          console.log(res)
-          console.log(URL.createObjectURL(res.data))
-          $('#preview').attr('src', URL.createObjectURL(res.data))
-      })
-      .finally(() => {
+      }
+  }
 
+  $('#generate').on('click', function () {
+      const dataObject = getAllData()
+      generateImage(dataObject)
+      .then((response) => {
+          const link = document.createElement('a');
+          link.href = window.URL.createObjectURL(response.data);
+          link.download = 'test.png';
+          link.click();
       })
   });
+
+  $('#preview-image').on('click', function () {
+      const dataObject = getAllData()
+      previewImage(dataObject)
+      .then((response) => {
+          $('#preview').attr('src', URL.createObjectURL(response))
+      })
+  })
 
   UploadImageModal.setCallbackUploadedImage(function (data) {
     const initClass = defaultDataElement.image.initClass
