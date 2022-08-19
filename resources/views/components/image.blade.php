@@ -145,6 +145,7 @@
                                             <option value="Times New Roman" selected>Times New Roman</option>
                                             <option value="Verdana">Verdana</option>
                                             <option value="Arial">Arial</option>
+                                            <option value="Roboto">Roboto</option>
                                         </select>
                                     </div>
                                 </div>

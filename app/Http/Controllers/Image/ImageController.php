@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Image;
 
 use App\Http\Controllers\Controller;
 use App\Services\Image\ImageConstructorService;
+use App\Utils\Image\DTO\ImageParametersDTO;
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
@@ -35,7 +36,12 @@ class ImageController extends Controller
      */
     public function generate(Request $request)
     {
-        $generalImage = $this->imageConstructorService->build($request);
+        $imageDTO = new ImageParametersDTO();
+        $imageDTO->setWidth($request->get('width', 0));
+        $imageDTO->setHeight($request->get('height', 0));
+        $imageDTO->setFabricData($request->get('fabric_data'));
+
+        $generalImage = $this->imageConstructorService->build($imageDTO);
 
         return response()->streamDownload(function () use ($generalImage) {
             echo $generalImage;
@@ -49,7 +55,12 @@ class ImageController extends Controller
      */
     public function preview(Request $request)
     {
-        $generalImage = $this->imageConstructorService->build($request);
+        $imageDTO = new ImageParametersDTO();
+        $imageDTO->setWidth($request->get('width', 0));
+        $imageDTO->setHeight($request->get('height', 0));
+        $imageDTO->setFabricData($request->get('fabric_data'));
+
+        $generalImage = $this->imageConstructorService->build($imageDTO);
 
         return response()->make($generalImage, 200, [
             'Content-type' => 'image/png'

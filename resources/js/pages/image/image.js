@@ -31,11 +31,11 @@ import {generateImage, previewImage} from "./method-api";
     height: 360
   })
 
-  canvasFabric.setBackgroundColor({
-    source: '/images/bg.png',
-    repeat: 'repeat',
-    id: 'test'
-  }, canvasFabric.renderAll.bind(canvasFabric));
+  // canvasFabric.setBackgroundColor({
+  //   source: '/images/bg.png',
+  //   repeat: 'repeat',
+  //   id: 'test'
+  // }, canvasFabric.renderAll.bind(canvasFabric));
 
   canvasFabric.on({
     'selection:cleared': function () {
@@ -165,7 +165,7 @@ import {generateImage, previewImage} from "./method-api";
   function setInfoDataElement() {
     const activeObject = canvasFabric.getActiveObject()
     const absoluteData = activeObject.getBoundingRect()
-      console.log(activeObject.getScaledWidth())
+
     elementX.val(absoluteData.left.toFixed(0))
     elementY.val(absoluteData.top.toFixed(0))
     elementWidth.val(absoluteData.width.toFixed(0))

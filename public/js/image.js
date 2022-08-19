@@ -53422,12 +53422,12 @@ __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap
   var canvasFabric = new fabric__WEBPACK_IMPORTED_MODULE_2__["fabric"].Canvas(canvas, {
     width: 640,
     height: 360
-  });
-  canvasFabric.setBackgroundColor({
-    source: '/images/bg.png',
-    repeat: 'repeat',
-    id: 'test'
-  }, canvasFabric.renderAll.bind(canvasFabric));
+  }); // canvasFabric.setBackgroundColor({
+  //   source: '/images/bg.png',
+  //   repeat: 'repeat',
+  //   id: 'test'
+  // }, canvasFabric.renderAll.bind(canvasFabric));
+
   canvasFabric.on({
     'selection:cleared': function selectionCleared() {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#info-data-element').addClass('d-none');
@@ -53542,7 +53542,6 @@ __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap
   function setInfoDataElement() {
     var activeObject = canvasFabric.getActiveObject();
     var absoluteData = activeObject.getBoundingRect();
-    console.log(activeObject.getScaledWidth());
     elementX.val(absoluteData.left.toFixed(0));
     elementY.val(absoluteData.top.toFixed(0));
     elementWidth.val(absoluteData.width.toFixed(0));

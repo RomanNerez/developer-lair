@@ -2,17 +2,22 @@
 
 namespace App\Services\Image;
 
+use App\UseCases\Image\ImageConstructor;
+use App\Utils\Image\DTO\ImageParametersDTO;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class ImageConstructorService
 {
-    public function build(Request $request): \Imagick
+    public function build(ImageParametersDTO $imageDTO): \Imagick
     {
-        $generalWidth = $request->get('width');
-        $generalHeight = $request->get('height');
+        $imageConstructor = new ImageConstructor(
+            $imageDTO->getWidth(),
+            $imageDTO->getHeight(),
+            $imageDTO->getFabricData()
+        );
 
-        $fabricData = $request->get('fabric_data');
+        return $imageConstructor->build();
 
         $generalFilename = Str::uuid().'.png';
         $generalPath = public_path('upload/'.$generalFilename);
@@ -121,5 +126,10 @@ class ImageConstructorService
         }
 
         return $generalImage;
+    }
+
+    private function initImageGenerating()
+    {
+
     }
 }
