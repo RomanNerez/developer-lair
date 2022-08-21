@@ -22,6 +22,10 @@ abstract class AbstractObject
 
     protected $backgroundColor;
 
+    protected $angle;
+
+    protected $boundingRect;
+
     public function __construct($objectData)
     {
         $this->initImagick = new \Imagick();
@@ -34,6 +38,8 @@ abstract class AbstractObject
         $this->scaleX = $objectData['scaleX'];
         $this->scaleY = $objectData['scaleY'];
         $this->backgroundColor = $objectData['backgroundColor'];
+        $this->angle = $objectData['angle'];
+        $this->boundingRect = $objectData['boundingRect'];
     }
 
     public function getWidth(): int
@@ -54,6 +60,41 @@ abstract class AbstractObject
     public function getTop(): int
     {
         return $this->top;
+    }
+
+    public function getAngle(): int
+    {
+        return $this->angle;
+    }
+
+    public function getAbsoluteWidth(): int
+    {
+        return $this->getBoundingRect()['width'] ?? 0;
+    }
+
+    public function getAbsoluteHeight(): int
+    {
+        return $this->getBoundingRect()['height'] ?? 0;
+    }
+
+    public function getAbsoluteLeft(): int
+    {
+        return $this->getBoundingRect()['left'] ?? 0;
+    }
+
+    public function getAbsoluteTop(): int
+    {
+        return $this->getBoundingRect()['top'] ?? 0;
+    }
+
+    public function getBoundingRect()
+    {
+        return $this->boundingRect;
+    }
+
+    protected function afterChangeHandler()
+    {
+        $this->initImagick->rotateImage('transparent', $this->getAngle());
     }
 
     abstract public function build(): \Imagick;

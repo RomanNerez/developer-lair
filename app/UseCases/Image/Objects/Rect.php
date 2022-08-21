@@ -19,6 +19,8 @@ class Rect extends AbstractObject
 
         $this->initImagick->newImage($this->getWidth(), $this->getHeight(), $color, 'png');
 
+        $this->afterChangeHandler();
+
         return $this->initImagick;
     }
 }

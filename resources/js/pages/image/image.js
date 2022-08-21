@@ -3,9 +3,14 @@ require('bootstrap')
 import axios from 'axios'
 import { fabric } from "fabric"
 import { defaultDataElement } from "./defaultDataElement"
-import { TEXTBOX_TYPE } from "./constants"
+import {
+  TEXTBOX_TYPE,
+  TYPE_ACTION_BLOCK_OBJECT,
+  TYPE_ACTION_REMOVE_OBJECT,
+  TYPE_ACTION_VISIBILITY_OBJECT
+} from "./constants"
 import UploadImageModal from "./UploadImageModal";
-import { getNewWidthAndHeight } from "../../utils/helpers";
+import {capitalizeFirstLetter, getNewWidthAndHeight} from "../../utils/helpers";
 import {generateImage, previewImage} from "./method-api";
 
 (function () {
@@ -17,6 +22,7 @@ import {generateImage, previewImage} from "./method-api";
   const elementHeight = $('#info-data-element #height')
   const elementAngle = $('#info-data-element #angle')
   const elementBackground = $('#info-data-element #background')
+  const elementFill = $('#info-data-element #fill')
 
   const elementLineHeight = $('#info-data-element #line-height')
   const elementTextAlign = $('#info-data-element #text-align')
@@ -40,13 +46,16 @@ import {generateImage, previewImage} from "./method-api";
   canvasFabric.on({
     'selection:cleared': function () {
       $('#info-data-element').addClass('d-none')
+      setActiveItemOfList()
     },
     'selection:created': function () {
       $('#info-data-element').removeClass('d-none')
       setInfoDataElement()
+      setActiveItemOfList()
     },
     'selection:updated': function () {
       setInfoDataElement()
+      setActiveItemOfList()
     },
     'object:moving': function () {
       setInfoDataElement()
@@ -67,6 +76,8 @@ import {generateImage, previewImage} from "./method-api";
 
   function getAllData() {
       const fabricData = JSON.parse(JSON.stringify(canvasFabric))
+      const objects = canvasFabric.getObjects()
+      fabricData.objects.forEach((object, index) => object.boundingRect = objects[index].getBoundingRect())
       return {
           width: canvasFabric.getWidth(),
           height: canvasFabric.getHeight(),
@@ -108,8 +119,10 @@ import {generateImage, previewImage} from "./method-api";
       
       element.scaleToWidth(width)
       element.scaleToHeight(height)
+      element.id = +new Date()
 
       canvasFabric.add(element);
+      updateListObjects()
     }
   })
 
@@ -117,6 +130,7 @@ import {generateImage, previewImage} from "./method-api";
     $(this).on('click', function () {
       const type = $(this).data('type')
       const initClass = defaultDataElement[type].initClass
+      defaultDataElement[type].defaultData.id = +new Date()
       let element;
       if (defaultDataElement[type].text) {
         element = new initClass(defaultDataElement[type].text, defaultDataElement[type].defaultData)
@@ -126,7 +140,8 @@ import {generateImage, previewImage} from "./method-api";
         element = new initClass(defaultDataElement[type].defaultData)
       }
       if (!element) return
-      canvasFabric.add(element);
+      canvasFabric.add(element)
+      updateListObjects()
     })
   })
 
@@ -145,6 +160,90 @@ import {generateImage, previewImage} from "./method-api";
     })
   })
 
+  function updateListObjects() {
+    const objects = canvasFabric.getObjects()
+    const activeObject = canvasFabric.getActiveObject()
+    const list = $('#list-object')
+    list.empty()
+
+    objects.forEach((object) => {
+      const itemObject = $('#list-object-clone li').clone()
+      itemObject.data('id', object.id)
+      $('.title', itemObject).html(capitalizeFirstLetter(object.type))
+      if (activeObject && activeObject.id === object.id) itemObject.addClass('active')
+      initActionsItemOfListObject(itemObject)
+      list.append(itemObject)
+    })
+  }
+
+  function initActionsItemOfListObject(itemObject) {
+    const actions = $('i', itemObject)
+    const objectId = parseInt(itemObject.data('id'))
+    const objects = canvasFabric.getObjects()
+    const object = objects.find((object) => object.id === objectId)
+    itemObject.click(function (event) {
+      let isAction = false
+      actions.each((index, item) => {
+        if (isAction) return
+        isAction = $(item).get(0) === event.target
+      })
+      if (isAction) return
+
+      canvasFabric.setActiveObject(object)
+      canvasFabric.renderAll()
+    })
+
+    actions.each(function (index, item) {
+      const action = $(item)
+
+      action.click(function() {
+        if (action.data('action') === TYPE_ACTION_VISIBILITY_OBJECT) {
+          action.toggleClass('fa-eye-slash')
+          action.toggleClass('fa-eye')
+          if (action.hasClass('fa-eye-slash')) {
+            object.setOptions({
+              visible: false,
+            })
+          } else {
+            object.setOptions({
+              visible: true,
+            })
+          }
+          canvasFabric.renderAll()
+        }
+        if (action.data('action') === TYPE_ACTION_BLOCK_OBJECT) {
+          action.toggleClass('fa-unlock')
+          action.toggleClass('fa-lock')
+          if (action.hasClass('fa-unlock')) {
+            object.setOptions({
+              selectable: true,
+              evented: true
+            })
+          } else {
+            object.setOptions({
+              selectable: false,
+              evented: false
+            })
+          }
+        }
+        if (action.data('action') === TYPE_ACTION_REMOVE_OBJECT) {
+          canvasFabric.remove(object)
+          updateListObjects()
+        }
+      })
+    })
+  }
+
+  function setActiveItemOfList() {
+    const activeObject = canvasFabric.getActiveObject()
+    $('#list-object li').each(function () {
+      $(this).removeClass('active')
+      if (activeObject && $(this).data('id') === activeObject.id) {
+        $(this).addClass('active')
+      }
+    })
+  }
+
   function initInfoDataElements() {
     const inputs = [
       elementX,
@@ -153,6 +252,7 @@ import {generateImage, previewImage} from "./method-api";
       elementHeight,
       elementAngle,
       elementBackground,
+      elementFill,
       elementLineHeight,
       elementTextAlign,
       elementFontFamily
@@ -171,7 +271,8 @@ import {generateImage, previewImage} from "./method-api";
     elementWidth.val(absoluteData.width.toFixed(0))
     elementHeight.val(absoluteData.height.toFixed(0))
     elementAngle.val(activeObject.angle.toFixed(0))
-
+    elementBackground.val(activeObject.backgroundColor)
+    elementFill.val(activeObject.fill)
     if (![TEXTBOX_TYPE].includes(activeObject.get('type'))) return
 
     setInfoDataForTextElement(activeObject)
@@ -181,7 +282,6 @@ import {generateImage, previewImage} from "./method-api";
     elementLineHeight.val(activeObject.lineHeight)
     elementTextAlign.val(activeObject.textAlign)
     elementFontFamily.val(activeObject.fontFamily)
-      console.log(activeObject)
   }
 
   function updateActiveElement() {
@@ -193,11 +293,12 @@ import {generateImage, previewImage} from "./method-api";
       height: parseFloat(elementHeight.val()),
       scaleX: 1,
       scaleY: 1,
-      angle: parseFloat(elementAngle.val()),
-      fill: elementBackground.val()
+      backgroundColor: elementBackground.val(),
+      fill: elementFill.val()
     }
 
     activeObject.setOptions(data)
+    activeObject.rotate(parseFloat(elementAngle.val()))
 
     if ([TEXTBOX_TYPE].includes(activeObject.get('type'))) {
       updateActiveElementText(activeObject)
@@ -218,10 +319,6 @@ import {generateImage, previewImage} from "./method-api";
 
   function init() {
     initInfoDataElements()
-    removeElementButton.on('click', function () {
-      const activeObject = canvasFabric.getActiveObject()
-      canvasFabric.remove(activeObject)
-    })
   }
 
   init()

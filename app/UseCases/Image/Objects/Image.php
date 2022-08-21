@@ -25,6 +25,8 @@ class Image extends AbstractObject
     {
         $this->initImagick->scaleImage($this->getWidth(), $this->getHeight());
 
+        $this->afterChangeHandler();
+
         return $this->initImagick;
     }
 }

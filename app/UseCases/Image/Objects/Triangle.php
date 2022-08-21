@@ -33,8 +33,10 @@ class Triangle extends AbstractObject
 
         $draw->polygon($points);
 
-        $this->initImagick->newImage(500, 300, 'none', 'png');
+        $this->initImagick->newImage($this->getWidth(), $this->getHeight(), $this->backgroundColor, 'png');
         $this->initImagick->drawImage($draw);
+
+        $this->afterChangeHandler();
 
         return $this->initImagick;
     }

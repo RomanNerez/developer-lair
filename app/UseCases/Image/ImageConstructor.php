@@ -48,8 +48,8 @@ class ImageConstructor
             $this->initImagick->compositeImage(
                 $object->build(),
                 \imagick::COMPOSITE_DEFAULT,
-                $object->getLeft(),
-                $object->getTop()
+                $object->getAbsoluteLeft(),
+                $object->getAbsoluteTop()
             );
         }
 

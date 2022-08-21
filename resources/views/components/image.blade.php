@@ -18,11 +18,83 @@
             min-height: 800px;
             width: 300px;
         }
+        #list-object li, #list-object-clone li {
+            cursor: pointer;
+        }
+        #list-object li .action, #list-object-clone li .action {
+            display: none;
+        }
+        #list-object li:hover .action, #list-object-clone li:hover .action {
+            display: block;
+        }
+        #list-object li:hover .action i, #list-object-clone li:hover .action i {
+            width: 15px;
+            text-align: center;
+        }
+        #list-object li.active, #list-object-clone li.active {
+            color: #000000;
+            background-color: #007bff4a;
+            border-color: #9acbff;
+        }
     </style>
 
     <div class="container-fluid">
         <div class="mt-5"></div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <ul class="nav justify-content-center mr-auto">
+                <li class="nav-item">
+                    <div id="change-size" class="dropdown">
+                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                            Change size area
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#" data-width="512" data-height="512">512x512</a>
+                            <a class="dropdown-item" href="#" data-width="640" data-height="360">640x360</a>
+                            <a class="dropdown-item" href="#" data-width="840" data-height="560">840x560</a>
+                            <a class="dropdown-item" href="#" data-type="Custom">Default...</a>
+                            <a class="dropdown-item" href="#" data-type="Custom">Custom...</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div id="add-element" class="dropdown">
+                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                            Add Element
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#" data-type="rect">Rect</a>
+                            <a class="dropdown-item" href="#" data-type="circle">Circle</a>
+                            <a class="dropdown-item" href="#" data-type="triangle">Triangle</a>
+                            <a class="dropdown-item" href="#" data-type="text">Text</a>
+                            <a class="dropdown-item" href="#" data-type="image">Image</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <button class="btn btn-primary btn-sm" id="preview-image">Preview Image</button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-secondary btn-sm" style="width: 100%" id="generate">Generate Image</button>
+                </li>
+            </ul>
+        </nav>
+        <div class="mt-3"></div>
         <div class="d-flex">
+            <div class="custom-navbar">
+                <ul class="list-group list-group-flush d-none" id="list-object-clone">
+                    <li class="list-group-item list-group-item-action d-flex justify-content-between">
+                        <span class="title">Clone</span>
+                        <div class="action">
+                            <i class="fa fa-eye" data-action="visibility" aria-hidden="true"></i>
+                            <i class="fa fa-unlock" data-action="block" aria-hidden="true"></i>
+                            <i class="fa fa-trash-o" data-action="remove" aria-hidden="true"></i>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="list-group list-group-flush" id="list-object"></ul>
+            </div>
             <div class="area-canvas">
                 <div class="area-canvas-container">
                     <canvas id="create-image"></canvas>
@@ -37,37 +109,7 @@
             </div>
             <div class="custom-navbar">
                 <div class="pt-1">
-                    <div class="row mx-0">
-                        <div class="col">
-                            <button class="btn btn-primary btn-sm" style="width: 100%" id="preview-image">Preview Image</button>
-                            <div id="change-size" class="dropdown">
-                                <button class="btn btn-secondary btn-sm dropdown-toggle mt-2" style="width: 100%" type="button" data-toggle="dropdown" aria-expanded="false">
-                                    Change size area
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#" data-width="512" data-height="512">512x512</a>
-                                    <a class="dropdown-item" href="#" data-width="640" data-height="360">640x360</a>
-                                    <a class="dropdown-item" href="#" data-width="840" data-height="560">840x560</a>
-                                    <a class="dropdown-item" href="#" data-type="Custom">Default...</a>
-                                    <a class="dropdown-item" href="#" data-type="Custom">Custom...</a>
-                                </div>
-                            </div>
-                            <div id="add-element" class="dropdown mt-2">
-                                <button class="btn btn-secondary btn-sm dropdown-toggle" style="width: 100%" type="button" data-toggle="dropdown" aria-expanded="false">
-                                    Add Element
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#" data-type="rect">Rect</a>
-                                    <a class="dropdown-item" href="#" data-type="circle">Circle</a>
-                                    <a class="dropdown-item" href="#" data-type="triangle">Triangle</a>
-                                    <a class="dropdown-item" href="#" data-type="text">Text</a>
-                                    <a class="dropdown-item" href="#" data-type="image">Image</a>
-                                </div>
-                            </div>
-                            <button class="btn btn-secondary btn-sm mt-2" style="width: 100%" id="generate">Generate Image</button>
-                        </div>
-                    </div>
-                    <div id="info-data-element" class="d-none">
+                    <div id="info-data-element">
                         <div class="row mx-0 mt-1">
                             <div class="col">
                                 <div class="form-row">
@@ -111,7 +153,11 @@
                                 <div class="form-row">
                                     <div class="form-group col-6">
                                         <label for="background">background</label>
-                                        <input type="color" id="background" class="form-control" >
+                                        <input type="color" opacity rgba id="background" class="form-control" >
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="fill">fill</label>
+                                        <input type="color" opacity rgba id="fill" class="form-control" >
                                     </div>
                                 </div>
                             </div>
@@ -142,18 +188,10 @@
                                     <div class="form-group" style="width: 100%">
                                         <label for="font-family">font family</label>
                                         <select id="font-family" class="form-control">
-                                            <option value="Times New Roman" selected>Times New Roman</option>
-                                            <option value="Verdana">Verdana</option>
-                                            <option value="Arial">Arial</option>
-                                            <option value="Roboto">Roboto</option>
+                                            <option value="Roboto" selected>Roboto</option>
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mx-0 mt-1">
-                            <div class="col">
-                                <button type="button" class="btn btn-danger" id="remove-button">Remove Element</button>
                             </div>
                         </div>
                     </div>
@@ -196,5 +234,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{asset('js/image.js?v='.time())}}"></script>
+    <script src="{{asset('js/image.js')}}"></script>
 @endpush
