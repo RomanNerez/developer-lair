@@ -59,9 +59,10 @@ export const defaultDataElement = {
       id: +new Date(),
       lineHeight: 1,
       textAlign: 'center',
-      fontFamily: 'Roboto',
+      fontFamily: 'AlumniSansCollegiateOne-Italic',
       backgroundColor: '#ffffff',
       fill: '#000000',
+      absolutePositioned: true,
     },
     text: 'Text',
     initClass: fabric.Textbox

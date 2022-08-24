@@ -27,7 +27,8 @@ class ImageController extends Controller
      */
     public function index()
     {
-        return view('components.image');
+        $fonts = config('fonts');
+        return view('components.image', compact('fonts'));
     }
 
     /**

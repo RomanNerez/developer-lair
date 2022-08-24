@@ -1,9 +1,9 @@
 import $ from "jquery"
 require('bootstrap')
-import axios from 'axios'
 import { fabric } from "fabric"
 import { defaultDataElement } from "./defaultDataElement"
 import {
+  I_TEXT_TYPE, TEXT_TYPE,
   TEXTBOX_TYPE,
   TYPE_ACTION_BLOCK_OBJECT,
   TYPE_ACTION_REMOVE_OBJECT,
@@ -27,7 +27,7 @@ import {generateImage, previewImage} from "./method-api";
   const elementLineHeight = $('#info-data-element #line-height')
   const elementTextAlign = $('#info-data-element #text-align')
   const elementFontFamily = $('#info-data-element #font-family')
-  const removeElementButton = $('#remove-button')
+  const elementFontSize = $('#info-data-element #font-size')
 
 //================================================
 
@@ -36,12 +36,26 @@ import {generateImage, previewImage} from "./method-api";
     width: 640,
     height: 360
   })
+  elementFontFamily.each(function (index, option) {
+    const fontFamily = $(option).val()
+    var text = new fabric.Text(" ", {
+      id: "text",
+      fontFamily,
+      top: -256,
+      left: 0,
+      fontSize: 45,
+      fill: "#000000",
+    });
+    canvasFabric.add(text);
+    canvasFabric.remove(text);
+  });
 
-  // canvasFabric.setBackgroundColor({
-  //   source: '/images/bg.png',
-  //   repeat: 'repeat',
-  //   id: 'test'
-  // }, canvasFabric.renderAll.bind(canvasFabric));
+
+  canvasFabric.setBackgroundColor({
+    source: '/images/bg.png',
+    repeat: 'repeat',
+    id: 'test'
+  }, canvasFabric.renderAll.bind(canvasFabric));
 
   canvasFabric.on({
     'selection:cleared': function () {
@@ -77,7 +91,13 @@ import {generateImage, previewImage} from "./method-api";
   function getAllData() {
       const fabricData = JSON.parse(JSON.stringify(canvasFabric))
       const objects = canvasFabric.getObjects()
-      fabricData.objects.forEach((object, index) => object.boundingRect = objects[index].getBoundingRect())
+      fabricData.objects.forEach((object, index) => {
+        object.boundingRect = objects[index].getBoundingRect()
+        if ([TEXTBOX_TYPE, I_TEXT_TYPE, TEXT_TYPE].includes(object.type)) {
+          object.lineHeights = objects[index].__lineHeights
+          object.text = objects[index].textLines.join("\n")
+        }
+      })
       return {
           width: canvasFabric.getWidth(),
           height: canvasFabric.getHeight(),
@@ -116,7 +136,7 @@ import {generateImage, previewImage} from "./method-api";
         canvasFabric.getWidth(),
         canvasFabric.getHeight()
       )
-      
+
       element.scaleToWidth(width)
       element.scaleToHeight(height)
       element.id = +new Date()
@@ -168,6 +188,24 @@ import {generateImage, previewImage} from "./method-api";
 
     objects.forEach((object) => {
       const itemObject = $('#list-object-clone li').clone()
+      const actions = $('i', itemObject)
+
+      actions.each(function (index, action) {
+        action = $(action)
+        if (action.data('action') === TYPE_ACTION_VISIBILITY_OBJECT) {
+          if (!object.visible) {
+            action.toggleClass('fa-eye-slash')
+            action.toggleClass('fa-eye')
+          }
+        }
+        if (action.data('action') === TYPE_ACTION_BLOCK_OBJECT) {
+          if (!object.selectable && !object.evented) {
+            action.toggleClass('fa-unlock')
+            action.toggleClass('fa-lock')
+          }
+        }
+      })
+
       itemObject.data('id', object.id)
       $('.title', itemObject).html(capitalizeFirstLetter(object.type))
       if (activeObject && activeObject.id === object.id) itemObject.addClass('active')
@@ -255,7 +293,8 @@ import {generateImage, previewImage} from "./method-api";
       elementFill,
       elementLineHeight,
       elementTextAlign,
-      elementFontFamily
+      elementFontFamily,
+      elementFontSize
     ]
     inputs.forEach((input) => {
       input.on('input', () => updateActiveElement())
@@ -273,15 +312,16 @@ import {generateImage, previewImage} from "./method-api";
     elementAngle.val(activeObject.angle.toFixed(0))
     elementBackground.val(activeObject.backgroundColor)
     elementFill.val(activeObject.fill)
-    if (![TEXTBOX_TYPE].includes(activeObject.get('type'))) return
+    if (![TEXTBOX_TYPE, I_TEXT_TYPE, TEXT_TYPE].includes(activeObject.get('type'))) return
 
     setInfoDataForTextElement(activeObject)
   }
 
   function setInfoDataForTextElement(activeObject) {
-    elementLineHeight.val(activeObject.lineHeight)
+    elementLineHeight.val(parseFloat(activeObject.lineHeight))
     elementTextAlign.val(activeObject.textAlign)
     elementFontFamily.val(activeObject.fontFamily)
+    elementFontSize.val(activeObject.fontSize)
   }
 
   function updateActiveElement() {
@@ -300,7 +340,7 @@ import {generateImage, previewImage} from "./method-api";
     activeObject.setOptions(data)
     activeObject.rotate(parseFloat(elementAngle.val()))
 
-    if ([TEXTBOX_TYPE].includes(activeObject.get('type'))) {
+    if ([TEXTBOX_TYPE, 'i-text', 'text'].includes(activeObject.get('type'))) {
       updateActiveElementText(activeObject)
     }
 
@@ -309,15 +349,17 @@ import {generateImage, previewImage} from "./method-api";
 
   function updateActiveElementText(activeObject) {
     const data = {
-      lineHeight: elementLineHeight.val(),
+      lineHeight: parseFloat(elementLineHeight.val()),
       textAlign: elementTextAlign.val(),
-      fontFamily: elementFontFamily.val()
+      fontFamily: elementFontFamily.val(),
+      fontSize: parseInt(elementFontSize.val())
     }
 
     activeObject.setOptions(data)
   }
 
   function init() {
+    $('[data-tooltip="true"]').tooltip()
     initInfoDataElements()
   }
 

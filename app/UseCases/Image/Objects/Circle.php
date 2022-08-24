@@ -15,14 +15,13 @@ class Circle extends AbstractObject
 
     public function build(): \Imagick
     {
-        // $strokeWidth = $object['strokeWidth'];
-
-        $this->initImagick->newImage($this->getWidth(), $this->getHeight(), 'none', 'png');
+        $this->initImagick->newImage($this->getWidth(), $this->getHeight(), $this->backgroundColor, 'png');
         $draw = new \ImagickDraw();
         $draw->setfillcolor($this->fill);
-        // $draw->setStrokeWidth($strokeWidth);
         $draw->circle($this->getWidth() / 2, $this->getHeight() / 2, $this->getWidth() / 2, $this->getWidth());
         $this->initImagick->drawimage($draw);
+
+        $this->afterChangeHandler();
 
         return $this->initImagick;
     }

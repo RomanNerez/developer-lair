@@ -13,8 +13,11 @@
         .area-canvas canvas {
             box-shadow: 0 0 2px 1px #c3c3c3;
         }
+        .custom-navbar-up, .custom-navbar {
+            border-radius: 4px;
+            box-shadow: 0 0 4px 1px #00000030;
+        }
         .custom-navbar {
-            border: 1px solid #000000;
             min-height: 800px;
             width: 300px;
         }
@@ -40,12 +43,19 @@
 
     <div class="container-fluid">
         <div class="mt-5"></div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light custom-navbar-up">
             <ul class="nav justify-content-center mr-auto">
                 <li class="nav-item">
                     <div id="change-size" class="dropdown">
-                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                            Change size area
+                        <button class="btn btn-secondary btn-sm dropdown-toggle mr-2"
+                            type="button"
+                            data-toggle="dropdown"
+                            aria-expanded="false"
+                            data-tooltip="true"
+                            data-placement="top"
+                            title="Change size"
+                        >
+                            <i class="fa fa-crop" aria-hidden="true"></i>
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#" data-width="512" data-height="512">512x512</a>
@@ -58,8 +68,15 @@
                 </li>
                 <li class="nav-item">
                     <div id="add-element" class="dropdown">
-                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                            Add Element
+                        <button class="btn btn-secondary btn-sm dropdown-toggle"
+                            type="button"
+                            data-toggle="dropdown"
+                            aria-expanded="false"
+                            data-tooltip="true"
+                            data-placement="top"
+                            title="Add element"
+                        >
+                            <i class="fa fa-plus" aria-hidden="true"></i>
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#" data-type="rect">Rect</a>
@@ -73,10 +90,22 @@
             </ul>
             <ul class="nav justify-content-center">
                 <li class="nav-item">
-                    <button class="btn btn-primary btn-sm" id="preview-image">Preview Image</button>
+                    <button class="btn btn-primary btn-sm mr-2" id="preview-image"
+                        data-tooltip="true"
+                        data-placement="top"
+                        title="Preview"
+                    >
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                    </button>
                 </li>
                 <li class="nav-item">
-                    <button class="btn btn-secondary btn-sm" style="width: 100%" id="generate">Generate Image</button>
+                    <button class="btn btn-secondary btn-sm" style="width: 100%" id="generate"
+                        data-tooltip="true"
+                        data-placement="top"
+                        title="Download"
+                    >
+                        <i class="fa fa-download" aria-hidden="true"></i>
+                    </button>
                 </li>
             </ul>
         </nav>
@@ -102,7 +131,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="d-flex justify-content-center" >
-                            <img id="preview" style="border: 1px solid #000000"/>
+                            <img id="preview" style="background-image: url('/images/bg.png'); background-repeat: repeat; border: 1px solid #000000"/>
                         </div>
                     </div>
                 </div>
@@ -163,7 +192,7 @@
                             </div>
                         </div>
                         <div class="row mx-0 mt-1" data-type="text">
-                            <div class="col">
+                            <div class="col-6">
                                 <div class="form-row">
                                     <div class="form-group">
                                         <label for="line-height">line height</label>
@@ -171,9 +200,17 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-6">
                                 <div class="form-row">
                                     <div class="form-group">
+                                        <label for="font-size">font size</label>
+                                        <input type="number" id="font-size" class="form-control" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-row">
+                                    <div class="form-group" style="width: 100%">
                                         <label for="text-align">text align</label>
                                         <select id="text-align" class="form-control">
                                             <option value="left" selected>Left</option>
@@ -188,7 +225,11 @@
                                     <div class="form-group" style="width: 100%">
                                         <label for="font-family">font family</label>
                                         <select id="font-family" class="form-control">
-                                            <option value="Roboto" selected>Roboto</option>
+                                            @foreach($fonts as $font)
+                                                @foreach($font['files'] as $name => $file)
+                                                    <option value="{{ $name }}" style="font-family: {{ $name }};">{{ $name }}</option>
+                                                @endforeach
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
