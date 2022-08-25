@@ -1,0 +1,47 @@
+@import "fonts";
+
+body {
+  background: #f3f0ec;
+}
+
+.container-fluid {
+  padding-top: 55px;
+}
+
+.area-canvas {
+  width: 100%;
+  padding: 0 10px;
+}
+.area-canvas .area-canvas-container .canvas-container  {
+  margin: 0 auto;
+}
+.area-canvas canvas {
+  box-shadow: 0 0 2px 1px #c3c3c3;
+}
+.custom-navbar-up, .custom-navbar {
+  border-radius: 4px;
+  box-shadow: 0 0 4px 1px #00000030;
+}
+.custom-navbar {
+  min-height: 800px;
+  width: 300px;
+  background: #ffffff;
+}
+#list-object li, #list-object-clone li {
+  cursor: pointer;
+}
+#list-object li .action, #list-object-clone li .action {
+  display: none;
+}
+#list-object li:hover .action, #list-object-clone li:hover .action {
+  display: block;
+}
+#list-object li:hover .action i, #list-object-clone li:hover .action i {
+  width: 15px;
+  text-align: center;
+}
+#list-object li.active, #list-object-clone li.active {
+  color: #000000;
+  background-color: #007bff4a;
+  border-color: #9acbff;
+}

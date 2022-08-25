@@ -23,6 +23,7 @@ Route::get('/mock-data', function () {
 
 Route::prefix('image')->namespace('Image')->group(function () {
     Route::get('/', 'ImageController@index')->name('image');
+    Route::get('/builder', 'ImageController@builder')->name('image-builder');
     Route::post('/generate', 'ImageController@generate')->name('image-generate');
     Route::post('/preview', 'ImageController@preview')->name('image-preview');
     Route::post('/upload', 'UploadMediaController@uploadImage')->name('upload-image');
