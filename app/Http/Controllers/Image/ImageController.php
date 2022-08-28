@@ -30,6 +30,26 @@ class ImageController extends Controller
         return view('components.image.index');
     }
 
+    public function compress()
+    {
+        return view('components.image.compress-image');
+    }
+
+    public function resize()
+    {
+        return view('components.image.resize-image');
+    }
+
+    public function crop()
+    {
+        return view('components.image.crop-image');
+    }
+
+    public function rotate()
+    {
+        return view('components.image.rotate-image');
+    }
+
     public function builder()
     {
         $fonts = config('fonts');
@@ -71,5 +91,10 @@ class ImageController extends Controller
         return response()->make($generalImage, 200, [
             'Content-type' => 'image/png'
         ]);
+    }
+
+    public function download($fileName)
+    {
+        return view('components.image.download');
     }
 }

@@ -1,9 +1,3 @@
-#navbarSupportedContent .open-dropdown-hover:hover div.dropdown-hover  {
-  display: block;
-  top: 80%;
-  left: auto;
-}
-
 .section-header {
   margin-top: 55px;
   width: 100%;
@@ -34,10 +28,14 @@
   color: #333333;
 }
 
+.section-offers {
+  padding-bottom: 50px;
+}
+
 .section-offers .card {
   position: relative;
   width: 300px;
-  height: 465px;
+  height: 480px;
   background: #ffffff;
   margin: 20px;
   border-radius: 20px;
@@ -67,7 +65,10 @@
 }
 .section-offers .card .content h4,
 .section-offers .card .content p {
-  color: #666666
+  color: #666666;
+}
+.section-offers .card .content h4{
+  font-size: 1.3rem;
 }
 .section-offers .card .content a {
   position: relative;
@@ -98,4 +99,10 @@
 .section-offers .col:nth-child(5) .card .circle,
 .section-offers .col:nth-child(5) .card .content a {
   background: #4c60ee;
+}
+
+section.text-footer {
+  background: #f2f3f8;
+  padding: 100px 0;
+  text-align: center;
 }

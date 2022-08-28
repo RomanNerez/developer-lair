@@ -26,7 +26,7 @@
                             <h2><i class="fa fa-picture-o" aria-hidden="true"></i></h2>
                         </div>
                         <div class="content">
-                            <h4>Image Builder</h4>
+                            <h4>Конструктор изображений</h4>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the</p>
                             <a href="{{ route('image-builder') }}">Перейти <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                         </div>
@@ -38,9 +38,9 @@
                             <h2><i class="fa fa-compress" aria-hidden="true"></i></h2>
                         </div>
                         <div class="content">
-                            <h4>Compress Image</h4>
+                            <h4>Сжать изображение</h4>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the</p>
-                            <a href="#">Перейти <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                            <a href="{{ route('image-compress') }}">Перейти <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
@@ -50,9 +50,9 @@
                             <h2><i class="fa fa-arrows-alt" aria-hidden="true"></i></h2>
                         </div>
                         <div class="content">
-                            <h4>Resize Image</h4>
+                            <h4>Изменить размер изображения</h4>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the</p>
-                            <a href="#">Перейти <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                            <a href="{{ route('image-resize') }}">Перейти <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
@@ -62,9 +62,9 @@
                             <h2><i class="fa fa-crop" aria-hidden="true"></i></h2>
                         </div>
                         <div class="content">
-                            <h4>Crop Image</h4>
+                            <h4>Обрезать изображение</h4>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the</p>
-                            <a href="#">Перейти <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                            <a href="{{ route('image-crop') }}">Перейти <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
@@ -74,11 +74,23 @@
                             <h2><i class="fa fa-repeat" aria-hidden="true"></i></h2>
                         </div>
                         <div class="content">
-                            <h4>Rotate Image</h4>
+                            <h4>Повернуть изображение</h4>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the</p>
-                            <a href="#">Перейти <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                            <a href="{{ route('image-rotate') }}">Перейти <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="text-footer">
+        <div class="container">
+            <div class="d-flex">
+                <div>
+                    <h2>Ваш надежный онлайн-редактор изображений, любимый пользователями по всему миру</h2>
+                    <p>
+                        Онлайн инструменты - это простое решение для редактирования изображений в Интернете. Получите доступ ко всем инструментам, которые вам нужны для улучшения ваших изображений, прямо из Интернета со 100% безопасностью
+                    </p>
                 </div>
             </div>
         </div>
