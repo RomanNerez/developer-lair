@@ -1,6 +1,6 @@
 import $ from "jquery"
-import ImageElement from "./rotate/ImageElement"
-import ImageElements from "./rotate/ImageElements";
+import ImageElement from "./ImageElement"
+import ImageElements from "./ImageElements";
 
 (function () {
   $(document).ready(function () {

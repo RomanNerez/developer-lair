@@ -74,7 +74,7 @@
             </ul>
         </nav>
         <div class="mt-3"></div>
-        <div class="d-flex">
+        <div class="d-flex justify-content-between">
             <div class="custom-navbar">
                 <ul class="list-group list-group-flush d-none" id="list-object-clone">
                     <li class="list-group-item list-group-item-action d-flex justify-content-between">
@@ -100,108 +100,7 @@
                     </div>
                 </div>
             </div>
-            <div class="custom-navbar">
-                <div class="pt-1">
-                    <div id="info-data-element">
-                        <div class="row mx-0 mt-1">
-                            <div class="col">
-                                <div class="form-row">
-                                    <div class="form-group col-6">
-                                        <label for="width">width</label>
-                                        <input type="number" id="width" class="form-control" >
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <label for="height" >height</label>
-                                        <input type="number" id="height" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mx-0 mt-1">
-                            <div class="col">
-                                <div class="form-row">
-                                    <div class="form-group col-6">
-                                        <label for="x">x</label>
-                                        <input type="number" id="x" class="form-control" >
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <label for="y">y</label>
-                                        <input type="number" id="y" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mx-0 mt-1">
-                            <div class="col">
-                                <div class="form-row">
-                                    <div class="form-group col-6">
-                                        <label for="angle">angle</label>
-                                        <input type="number" id="angle" class="form-control" >
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mx-0 mt-1">
-                            <div class="col">
-                                <div class="form-row">
-                                    <div class="form-group col-6">
-                                        <label for="background">background</label>
-                                        <input type="color" opacity rgba id="background" class="form-control" >
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <label for="fill">fill</label>
-                                        <input type="color" opacity rgba id="fill" class="form-control" >
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mx-0 mt-1" data-type="text">
-                            <div class="col-6">
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="line-height">line height</label>
-                                        <input type="number" id="line-height" class="form-control" >
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="font-size">font size</label>
-                                        <input type="number" id="font-size" class="form-control" >
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-row">
-                                    <div class="form-group" style="width: 100%">
-                                        <label for="text-align">text align</label>
-                                        <select id="text-align" class="form-control">
-                                            <option value="left" selected>Left</option>
-                                            <option value="center">Center</option>
-                                            <option value="right">Right</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-row">
-                                    <div class="form-group" style="width: 100%">
-                                        <label for="font-family">font family</label>
-                                        <select id="font-family" class="form-control">
-                                            @foreach($fonts as $font)
-                                                @foreach($font['files'] as $name => $file)
-                                                    <option value="{{ $name }}" style="font-family: {{ $name }};">{{ $name }}</option>
-                                                @endforeach
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @include('components.image.inludes.builder.settings-navbar')
         </div>
         <div class="mt-5"></div>
     </div>
@@ -240,5 +139,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{asset('js/image.js')}}"></script>
+    <script src="{{asset('js/image/builder.js')}}"></script>
 @endpush

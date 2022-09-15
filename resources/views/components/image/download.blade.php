@@ -105,5 +105,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/image/image-rotate.js?v='.time()) }}"></script>
+    <script src="{{ asset('js/image/rotate.js?v='.time()) }}"></script>
 @endpush

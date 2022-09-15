@@ -1,8 +1,8 @@
 {
-    "/js/app.js": "/js/app.js",
+    "/js/common.js": "/js/common.js",
     "/css/app.css": "/css/app.css",
     "/css/image/image.css": "/css/image/image.css",
     "/css/image/image-builder.css": "/css/image/image-builder.css",
-    "/js/image.js": "/js/image.js",
-    "/js/image/image-rotate.js": "/js/image/image-rotate.js"
+    "/js/image/builder.js": "/js/image/builder.js",
+    "/js/image/rotate.js": "/js/image/rotate.js"
 }

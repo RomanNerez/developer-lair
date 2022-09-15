@@ -1,6 +1,6 @@
-import $ from "jquery"
-require('bootstrap')
 import { fabric } from "fabric"
+import Coloris from "@melloware/coloris";
+
 import { defaultDataElement } from "./defaultDataElement"
 import {
   I_TEXT_TYPE, TEXT_TYPE,
@@ -10,11 +10,13 @@ import {
   TYPE_ACTION_VISIBILITY_OBJECT
 } from "./constants"
 import UploadImageModal from "./UploadImageModal";
-import {capitalizeFirstLetter, getNewWidthAndHeight} from "../../utils/helpers";
-import {generateImage, previewImage} from "./method-api";
+import { capitalizeFirstLetter, getNewWidthAndHeight } from "../../../utils/helpers";
+import { generateImage, previewImage } from "./method-api";
+import SettingsControl from "./SettingsControl";
 
-(function () {
-  //===== Interface for Elements ========
+
+(function ($) {
+  //===================== Elements ======================
 
   const elementX = $('#info-data-element #x')
   const elementY = $('#info-data-element #y')
@@ -29,7 +31,20 @@ import {generateImage, previewImage} from "./method-api";
   const elementFontFamily = $('#info-data-element #font-family')
   const elementFontSize = $('#info-data-element #font-size')
 
-//================================================
+  const buttonGenerate = $('#generate')
+  const buttonPreviewImage = $('#preview-image')
+
+  const dropdownAddElements = $('#add-element .dropdown-menu a')
+  const dropdownChangeSizeElements = $('#change-size .dropdown-menu a')
+
+  const settingsElement = $('#settings-element')
+
+  //======================================================
+
+  const settingsControl = new SettingsControl(settingsElement)
+  settingsControl.on('input', function (event) {
+    console.log(event)
+  })
 
   const canvas = document.querySelector('#create-image')
   const canvasFabric = new fabric.Canvas(canvas, {
@@ -50,7 +65,6 @@ import {generateImage, previewImage} from "./method-api";
     canvasFabric.remove(text);
   });
 
-
   canvasFabric.setBackgroundColor({
     source: '/images/bg.png',
     repeat: 'repeat',
@@ -59,11 +73,11 @@ import {generateImage, previewImage} from "./method-api";
 
   canvasFabric.on({
     'selection:cleared': function () {
-      $('#info-data-element').addClass('d-none')
+      settingsControl.hide()
       setActiveItemOfList()
     },
     'selection:created': function () {
-      $('#info-data-element').removeClass('d-none')
+      settingsControl.show()
       setInfoDataElement()
       setActiveItemOfList()
     },
@@ -105,7 +119,7 @@ import {generateImage, previewImage} from "./method-api";
       }
   }
 
-  $('#generate').on('click', function () {
+  buttonGenerate.on('click', function () {
       const dataObject = getAllData()
       generateImage(dataObject)
       .then((response) => {
@@ -116,7 +130,7 @@ import {generateImage, previewImage} from "./method-api";
       })
   });
 
-  $('#preview-image').on('click', function () {
+  buttonPreviewImage.on('click', function () {
       const dataObject = getAllData()
       previewImage(dataObject)
       .then((response) => {
@@ -146,7 +160,7 @@ import {generateImage, previewImage} from "./method-api";
     }
   })
 
-  $('#add-element .dropdown-menu a').each(function () {
+  dropdownAddElements.each(function () {
     $(this).on('click', function () {
       const type = $(this).data('type')
       const initClass = defaultDataElement[type].initClass
@@ -165,7 +179,7 @@ import {generateImage, previewImage} from "./method-api";
     })
   })
 
-  $('#change-size .dropdown-menu a').each(function () {
+  dropdownChangeSizeElements.each(function () {
     $(this).on('click', function () {
       const width = $(this).data('width')
       const height = $(this).data('height')
@@ -303,6 +317,7 @@ import {generateImage, previewImage} from "./method-api";
 
   function setInfoDataElement() {
     const activeObject = canvasFabric.getActiveObject()
+    if (!activeObject) return
     const absoluteData = activeObject.getBoundingRect()
 
     elementX.val(absoluteData.left.toFixed(0))
@@ -326,6 +341,7 @@ import {generateImage, previewImage} from "./method-api";
 
   function updateActiveElement() {
     const activeObject = canvasFabric.getActiveObject()
+    if (!activeObject) return
     const data = {
       top: parseFloat(elementY.val()),
       left: parseFloat(elementX.val()),
@@ -359,9 +375,13 @@ import {generateImage, previewImage} from "./method-api";
   }
 
   function init() {
+    Coloris.init();
+    Coloris({el: "#info-data-element #background"});
+    Coloris({el: "#info-data-element #fill"});
     $('[data-tooltip="true"]').tooltip()
     initInfoDataElements()
+    $('select').select2()
   }
 
   init()
-})()
+})(jQuery)

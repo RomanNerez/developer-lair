@@ -1,4 +1,5 @@
 @import "fonts";
+@import "~@melloware/coloris/dist/coloris.css";
 
 body {
   background: #f3f0ec;
@@ -9,7 +10,6 @@ body {
 }
 
 .area-canvas {
-  width: 100%;
   padding: 0 10px;
 }
 .area-canvas .area-canvas-container .canvas-container  {
@@ -24,7 +24,7 @@ body {
 }
 .custom-navbar {
   min-height: 800px;
-  width: 300px;
+  width: 205px;
   background: #ffffff;
 }
 #list-object li, #list-object-clone li {

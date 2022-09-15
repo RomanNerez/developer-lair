@@ -15,6 +15,6 @@ mix.sass('resources/sass/app.scss', 'public/css')
    .sass('resources/sass/image/image.scss', 'public/css/image')
    .sass('resources/sass/image/image-builder.scss', 'public/css/image')
 
-mix.js('resources/js/app.js', 'public/js')
-   .js('resources/js/pages/image/image.js', 'public/js')
-   .js('resources/js/pages/image/image-rotate.js', 'public/js/image');
+mix.js('resources/js/common.js', 'public/js')
+   .js('resources/js/pages/image/builder/builder.js', 'public/js/image')
+   .js('resources/js/pages/image/rotate/rotate.js', 'public/js/image');
