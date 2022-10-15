@@ -1,1 +1,125 @@
-.section-header{margin-top:55px;width:100%;height:500px;background:#3f5efb;background:radial-gradient(circle,#3f5efb 0,#fc466b 100%)}.section-header .container,.section-header .content{height:100%}.section-header .content{display:flex;justify-content:center;align-items:center;color:#fff;text-align:center}.section-header .content a{background:none;border:3px solid #fff;padding:10px 30px;color:#fff;text-transform:uppercase}.section-header .content a:hover{background:#fff;color:#333}.section-offers{padding-bottom:50px}.section-offers .card{position:relative;width:300px;height:480px;background:#fff;margin:20px;border-radius:20px;overflow:hidden;box-shadow:0 15px 25px rgba(0,0,0,.2);transition:.5s}.section-offers .card .circle{position:relative;width:100%;height:100%;background:#000;-webkit-clip-path:circle(180px at center 0);clip-path:circle(180px at center 0);text-align:center}.section-offers .card .circle h2{color:#fff;font-size:4.5em;padding:30px 0}.section-offers .card .content{position:absolute;bottom:10px;page-break-after:always;padding:20px;text-align:center}.section-offers .card .content h4,.section-offers .card .content p{color:#666}.section-offers .card .content h4{font-size:1.3rem}.section-offers .card .content a{position:relative;display:inline-block;padding:10px 20px;background:#000;color:#fff;border-radius:40px;text-decoration:none;margin-top:20px}.section-offers .col:first-child .card .circle,.section-offers .col:first-child .card .content a{background:#ffaf00}.section-offers .col:nth-child(2) .card .circle,.section-offers .col:nth-child(2) .card .content a{background:#da2268}.section-offers .col:nth-child(3) .card .circle,.section-offers .col:nth-child(3) .card .content a{background:#bb02ff}.section-offers .col:nth-child(4) .card .circle,.section-offers .col:nth-child(4) .card .content a{background:#6aee55}.section-offers .col:nth-child(5) .card .circle,.section-offers .col:nth-child(5) .card .content a{background:#4c60ee}section.text-footer{background:#f2f3f8;padding:100px 0;text-align:center}
+.section-header {
+  margin-top: 55px;
+  width: 100%;
+  height: 500px;
+  background: rgb(63, 94, 251);
+  background: radial-gradient(circle, rgb(63, 94, 251) 0%, rgb(252, 70, 107) 100%);
+}
+
+.section-header .content,
+.section-header .container {
+  height: 100%;
+}
+
+.section-header .content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  text-align: center;
+}
+
+.section-header .content a {
+  background: none;
+  border: 3px solid #ffffff;
+  padding: 10px 30px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.section-header .content a:hover {
+  background: #ffffff;
+  color: #333333;
+}
+
+.section-offers {
+  padding-bottom: 50px;
+}
+
+.section-offers .card {
+  position: relative;
+  width: 300px;
+  height: 480px;
+  background: #ffffff;
+  margin: 20px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+  transition: 0.5s;
+}
+
+.section-offers .card .circle {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  -webkit-clip-path: circle(180px at center 0);
+          clip-path: circle(180px at center 0);
+  text-align: center;
+}
+
+.section-offers .card .circle h2 {
+  color: #ffffff;
+  font-size: 4.5em;
+  padding: 30px 0;
+}
+
+.section-offers .card .content {
+  position: absolute;
+  bottom: 10px;
+  page-break-after: always;
+  padding: 20px;
+  text-align: center;
+}
+
+.section-offers .card .content h4,
+.section-offers .card .content p {
+  color: #666666;
+}
+
+.section-offers .card .content h4 {
+  font-size: 1.3rem;
+}
+
+.section-offers .card .content a {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  background: #000000;
+  color: #ffffff;
+  border-radius: 40px;
+  text-decoration: none;
+  margin-top: 20px;
+}
+
+.section-offers .col:nth-child(1) .card .circle,
+.section-offers .col:nth-child(1) .card .content a {
+  background: #ffaf00;
+}
+
+.section-offers .col:nth-child(2) .card .circle,
+.section-offers .col:nth-child(2) .card .content a {
+  background: #da2268;
+}
+
+.section-offers .col:nth-child(3) .card .circle,
+.section-offers .col:nth-child(3) .card .content a {
+  background: #bb02ff;
+}
+
+.section-offers .col:nth-child(4) .card .circle,
+.section-offers .col:nth-child(4) .card .content a {
+  background: #6aee55;
+}
+
+.section-offers .col:nth-child(5) .card .circle,
+.section-offers .col:nth-child(5) .card .content a {
+  background: #4c60ee;
+}
+
+section.text-footer {
+  background: #f2f3f8;
+  padding: 100px 0;
+  text-align: center;
+}
+

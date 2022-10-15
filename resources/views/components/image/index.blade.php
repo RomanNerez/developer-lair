@@ -35,6 +35,18 @@
                 <div class="col d-flex justify-content-center">
                     <div class="card">
                         <div class="circle">
+                            <h2><i class="fa fa-picture-o" aria-hidden="true"></i></h2>
+                        </div>
+                        <div class="content">
+                            <h4>Мемы</h4>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the</p>
+                            <a href="{{ route('image-builder') }}">Перейти <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-flex justify-content-center">
+                    <div class="card">
+                        <div class="circle">
                             <h2><i class="fa fa-compress" aria-hidden="true"></i></h2>
                         </div>
                         <div class="content">

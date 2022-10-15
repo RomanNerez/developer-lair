@@ -27,7 +27,13 @@ Route::prefix('image')->namespace('Image')->group(function () {
     Route::get('/compress', 'ImageController@compress')->name('image-compress');
     Route::get('/resize', 'ImageController@resize')->name('image-resize');
     Route::get('/crop', 'ImageController@crop')->name('image-crop');
-    Route::get('/rotate', 'ImageController@rotate')->name('image-rotate');
+
+    Route::prefix('/rotate')->group(function () {
+        Route::get('/', 'RotateImageController@index')->name('image-rotate');
+        Route::post('/rotate-download', 'RotateImageController@download')->name('rotate-download');
+    });
+
+
     Route::get('/download/{fileName}', 'ImageController@download')->name('image-download');
     Route::post('/generate', 'ImageController@generate')->name('image-generate');
     Route::post('/preview', 'ImageController@preview')->name('image-preview');

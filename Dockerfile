@@ -42,6 +42,11 @@ RUN apt-get update && apt-get install -y libmagickwand-6.q16-dev --no-install-re
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+
+RUN apt-get -y install pngquant
+RUN apt-get -y install nodejs
+RUN apt-get -y install npm
+
 # Add user for laravel application
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www

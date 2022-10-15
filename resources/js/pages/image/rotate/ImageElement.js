@@ -1,11 +1,20 @@
-export default class ImageElement {
+import Observer from "../../../utils/Observer";
+
+export const ON_ROTATE = 'rotate'
+
+class ImageElement extends Observer {
   fileName = null
   id = +new Date()
   angel = 0
-  file
+  file = null
+  extension = null
+  url = null
 
   constructor(fileName, file) {
-    this.fileName = fileName
+    super();
+    const fileNameData = fileName.split('.')
+    this.fileName = fileNameData[0]
+    this.extension = fileNameData[1]
     this.file = file
     this.url = this.getUrlFile(file)
   }
@@ -13,18 +22,25 @@ export default class ImageElement {
   setAngel(newAngel) {
     this.angel = newAngel
     if (Math.abs(this.angel) >= 360) this.angel = 0
+    this.dispatch(ON_ROTATE, this)
   }
 
   rotateRight() {
     this.setAngel(this.angel - 90)
+    this.dispatch(ON_ROTATE, this)
   }
 
   rotateLeft() {
     this.setAngel(this.angel + 90)
+    this.dispatch(ON_ROTATE, this)
   }
 
   getFileName () {
     return this.fileName
+  }
+
+  getFullFileName() {
+    return `${this.fileName}.${this.extension}`
   }
 
   getId() {
@@ -43,3 +59,5 @@ export default class ImageElement {
     return this.url
   }
 }
+
+export default ImageElement

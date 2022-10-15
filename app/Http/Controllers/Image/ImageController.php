@@ -45,11 +45,6 @@ class ImageController extends Controller
         return view('components.image.crop-image');
     }
 
-    public function rotate()
-    {
-        return view('components.image.rotate-image');
-    }
-
     public function builder()
     {
         $fonts = config('fonts');
