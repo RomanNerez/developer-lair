@@ -1,15 +1,15 @@
 export function getNewWidthAndHeight(currentWidth, currentHeight, toWidth, toHeight) {
   const currentRatio = currentWidth / currentHeight
   const toRatio = toWidth / toHeight
-  let width;
-  let height;
+  let width = toWidth;
+  let height = toHeight;
 
   if (currentRatio < toRatio) {
-    width = currentWidth / (toRatio / currentRatio)
+    width = toWidth / (toRatio / currentRatio)
     height = toHeight
   } else if (toRatio < currentRatio) {
     width = toWidth
-    height = currentHeight / (currentRatio / toRatio)
+    height = toHeight / (currentRatio / toRatio)
   }
 
   return { width, height }
@@ -26,4 +26,15 @@ export function rgbToHex(r, g, b) {
 
 export function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+export function getTypeByInputType(type, value) {
+  switch (type) {
+    case 'text':
+      return String(value)
+    case 'number':
+      return Number(value)
+    default:
+      return value
+  }
 }

@@ -48104,7 +48104,7 @@ function _generateImage() {
 /*!***************************************!*\
   !*** ./resources/js/utils/helpers.js ***!
   \***************************************/
-/*! exports provided: getNewWidthAndHeight, rgbToHex, capitalizeFirstLetter */
+/*! exports provided: getNewWidthAndHeight, rgbToHex, capitalizeFirstLetter, getTypeByInputType */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48112,18 +48112,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNewWidthAndHeight", function() { return getNewWidthAndHeight; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rgbToHex", function() { return rgbToHex; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "capitalizeFirstLetter", function() { return capitalizeFirstLetter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTypeByInputType", function() { return getTypeByInputType; });
 function getNewWidthAndHeight(currentWidth, currentHeight, toWidth, toHeight) {
   var currentRatio = currentWidth / currentHeight;
   var toRatio = toWidth / toHeight;
-  var width;
-  var height;
+  var width = toWidth;
+  var height = toHeight;
 
   if (currentRatio < toRatio) {
-    width = currentWidth / (toRatio / currentRatio);
+    width = toWidth / (toRatio / currentRatio);
     height = toHeight;
   } else if (toRatio < currentRatio) {
     width = toWidth;
-    height = currentHeight / (currentRatio / toRatio);
+    height = toHeight / (currentRatio / toRatio);
   }
 
   return {
@@ -48142,6 +48143,18 @@ function rgbToHex(r, g, b) {
 }
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
+}
+function getTypeByInputType(type, value) {
+  switch (type) {
+    case 'text':
+      return String(value);
+
+    case 'number':
+      return Number(value);
+
+    default:
+      return value;
+  }
 }
 
 /***/ }),
