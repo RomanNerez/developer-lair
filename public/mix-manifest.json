@@ -1,6 +1,8 @@
 {
+    "/js/admin.js": "/js/admin.js",
     "/js/common.js": "/js/common.js",
     "/css/app.css": "/css/app.css",
+    "/css/admin.css": "/css/admin.css",
     "/css/image/image.css": "/css/image/image.css",
     "/css/image/image-builder.css": "/css/image/image-builder.css",
     "/js/image/builder.js": "/js/image/builder.js",

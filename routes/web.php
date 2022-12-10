@@ -39,3 +39,13 @@ Route::prefix('image')->namespace('Image')->group(function () {
     Route::post('/preview', 'ImageController@preview')->name('image-preview');
     Route::post('/upload', 'UploadMediaController@uploadImage')->name('upload-image');
 });
+
+Auth::routes();
+
+Route::prefix('admin')
+    ->middleware('auth')
+    ->namespace('Admin')
+    ->group(function () {
+        Route::get('/', 'DashboardController@index')->name('admin-index');
+        Route::get('/media', 'MediaController@index')->name('admin-media');
+    });

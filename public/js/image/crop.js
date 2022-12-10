@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -94,7 +94,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../../css-loader??ref--8-1!../../../../postcss-loader/src??ref--8-2!./splide.min.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/@splidejs/splide/dist/css/splide.min.css");
+var content = __webpack_require__(/*! !../../../../css-loader??ref--9-1!../../../../postcss-loader/src??ref--9-2!./splide.min.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/@splidejs/splide/dist/css/splide.min.css");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -7530,7 +7530,7 @@ var SplideRenderer = /*#__PURE__*/function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../css-loader??ref--8-1!../../postcss-loader/src??ref--8-2!./cropper.min.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/cropperjs/dist/cropper.min.css");
+var content = __webpack_require__(/*! !../../css-loader??ref--9-1!../../postcss-loader/src??ref--9-2!./cropper.min.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/cropperjs/dist/cropper.min.css");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -7554,7 +7554,7 @@ if(false) {}
 
 /***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/@splidejs/splide/dist/css/splide.min.css":
 /*!***********************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--8-1!./node_modules/postcss-loader/src??ref--8-2!./node_modules/@splidejs/splide/dist/css/splide.min.css ***!
+  !*** ./node_modules/css-loader??ref--9-1!./node_modules/postcss-loader/src??ref--9-2!./node_modules/@splidejs/splide/dist/css/splide.min.css ***!
   \***********************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -7573,7 +7573,7 @@ exports.push([module.i, ".splide__container{box-sizing:border-box;position:relat
 
 /***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/cropperjs/dist/cropper.min.css":
 /*!*************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--8-1!./node_modules/postcss-loader/src??ref--8-2!./node_modules/cropperjs/dist/cropper.min.css ***!
+  !*** ./node_modules/css-loader??ref--9-1!./node_modules/postcss-loader/src??ref--9-2!./node_modules/cropperjs/dist/cropper.min.css ***!
   \*************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -19814,7 +19814,7 @@ function getTypeByInputType(type, value) {
 
 /***/ }),
 
-/***/ 6:
+/***/ 7:
 /*!*****************************************************!*\
   !*** multi ./resources/js/pages/image/crop/crop.js ***!
   \*****************************************************/

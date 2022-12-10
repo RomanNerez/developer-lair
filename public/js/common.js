@@ -24223,6 +24223,17 @@ __webpack_require__(/*! select2 */ "./node_modules/select2/dist/js/select2.js");
 
 /***/ }),
 
+/***/ "./resources/sass/admin.scss":
+/*!***********************************!*\
+  !*** ./resources/sass/admin.scss ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -24257,14 +24268,15 @@ __webpack_require__(/*! select2 */ "./node_modules/select2/dist/js/select2.js");
 /***/ }),
 
 /***/ 0:
-/*!********************************************************************************************************************************************!*\
-  !*** multi ./resources/js/common.js ./resources/sass/app.scss ./resources/sass/image/image.scss ./resources/sass/image/image-builder.scss ***!
-  \********************************************************************************************************************************************/
+/*!************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/common.js ./resources/sass/app.scss ./resources/sass/admin.scss ./resources/sass/image/image.scss ./resources/sass/image/image-builder.scss ***!
+  \************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /var/www/resources/js/common.js */"./resources/js/common.js");
 __webpack_require__(/*! /var/www/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/resources/sass/admin.scss */"./resources/sass/admin.scss");
 __webpack_require__(/*! /var/www/resources/sass/image/image.scss */"./resources/sass/image/image.scss");
 module.exports = __webpack_require__(/*! /var/www/resources/sass/image/image-builder.scss */"./resources/sass/image/image-builder.scss");
 

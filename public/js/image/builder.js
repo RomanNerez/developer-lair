@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -5027,7 +5027,7 @@ if (typeof document !== 'undefined' && typeof window !== 'undefined') {
 }
 else {
   // assume we're running under node.js when document/window are not present
-  var jsdom = __webpack_require__(/*! jsdom */ 2);
+  var jsdom = __webpack_require__(/*! jsdom */ 3);
   var virtualWindow = new jsdom.JSDOM(
     decodeURIComponent('%3C!DOCTYPE%20html%3E%3Chtml%3E%3Chead%3E%3C%2Fhead%3E%3Cbody%3E%3C%2Fbody%3E%3C%2Fhtml%3E'),
     {
@@ -5037,8 +5037,8 @@ else {
       resources: 'usable'
     }).window;
   fabric.document = virtualWindow.document;
-  fabric.jsdomImplForWrapper = __webpack_require__(/*! jsdom/lib/jsdom/living/generated/utils */ 3).implForWrapper;
-  fabric.nodeCanvas = __webpack_require__(/*! jsdom/lib/jsdom/utils */ 4).Canvas;
+  fabric.jsdomImplForWrapper = __webpack_require__(/*! jsdom/lib/jsdom/living/generated/utils */ 4).implForWrapper;
+  fabric.nodeCanvas = __webpack_require__(/*! jsdom/lib/jsdom/utils */ 5).Canvas;
   fabric.window = virtualWindow;
   DOMParser = fabric.window.DOMParser;
 }
@@ -48159,7 +48159,7 @@ function getTypeByInputType(type, value) {
 
 /***/ }),
 
-/***/ 1:
+/***/ 2:
 /*!***********************************************************!*\
   !*** multi ./resources/js/pages/image/builder/builder.js ***!
   \***********************************************************/
@@ -48171,7 +48171,7 @@ module.exports = __webpack_require__(/*! /var/www/resources/js/pages/image/build
 
 /***/ }),
 
-/***/ 2:
+/***/ 3:
 /*!***********************!*\
   !*** jsdom (ignored) ***!
   \***********************/
@@ -48182,7 +48182,7 @@ module.exports = __webpack_require__(/*! /var/www/resources/js/pages/image/build
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!********************************************************!*\
   !*** jsdom/lib/jsdom/living/generated/utils (ignored) ***!
   \********************************************************/
@@ -48193,7 +48193,7 @@ module.exports = __webpack_require__(/*! /var/www/resources/js/pages/image/build
 
 /***/ }),
 
-/***/ 4:
+/***/ 5:
 /*!***************************************!*\
   !*** jsdom/lib/jsdom/utils (ignored) ***!
   \***************************************/
