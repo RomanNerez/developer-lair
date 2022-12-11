@@ -26,13 +26,19 @@ Route::prefix('image')->namespace('Image')->group(function () {
     Route::get('/builder', 'ImageController@builder')->name('image-builder');
     Route::get('/compress', 'ImageController@compress')->name('image-compress');
     Route::get('/resize', 'ImageController@resize')->name('image-resize');
-    Route::get('/crop', 'ImageController@crop')->name('image-crop');
+
+    Route::prefix('/crop')->group(function () {
+        Route::get('/', 'CropImageController@index')->name('image-crop');
+        Route::post('/cropping', 'CropImageController@cropping')->name('image-cropping');
+    });
 
     Route::prefix('/rotate')->group(function () {
         Route::get('/', 'RotateImageController@index')->name('image-rotate');
         Route::post('/rotate-download', 'RotateImageController@download')->name('rotate-download');
     });
 
+
+    Route::get('/share/{uuid}', 'ImageController@share')->name('image-share');
 
     Route::get('/download/{fileName}', 'ImageController@download')->name('image-download');
     Route::post('/generate', 'ImageController@generate')->name('image-generate');

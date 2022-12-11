@@ -30,6 +30,7 @@ export default class CropperImage extends Observer {
       this.destroyCropper()
       const event = await this._initCropper()
       this._setCropBoxDataFromImage()
+      this._setContainerDataToImage()
       this.dispatch(ON_READY_CROPPER, { event })
     }
     this.imageElement.src = url
@@ -42,12 +43,27 @@ export default class CropperImage extends Observer {
     }
   }
 
+  _setContainerDataToImage() {
+    this.currentImageInstance.setContainerData(this.getContainerData())
+  }
+
   getCropBoxData() {
     return this.cropperInstance.getCropBoxData()
   }
 
+  getContainerData() {
+    return this.cropperInstance.getContainerData()
+  }
+
+  getCurrentImageSize() {
+    return this.currentImageInstance.getSize()
+  }
+
   setCropBoxData(data) {
-    this.cropperInstance.setCropBoxData(data)
+    this.cropperInstance.setCropBoxData({
+      ...this.getCropBoxData(),
+      ...data
+    })
   }
 
   destroyCropper() {
@@ -67,6 +83,7 @@ export default class CropperImage extends Observer {
           },
           cropmove: (event) => {
             this.currentImageInstance.setCropBoxData(this.getCropBoxData())
+            this.currentImageInstance.setContainerData(this.getContainerData())
             this.dispatch(ON_CROP_MOVE, event)
           }
         }

@@ -2,12 +2,20 @@ import Observer from "../../../utils/Observer";
 
 class ImageElement extends Observer {
 
+
   width = 0
   height = 0
   id = +new Date()
   file = null
   url = null
   cropBoxData = null
+  containerData = null
+  inputData = {
+    left: 0,
+    top: 0,
+    width: 0,
+    height: 0
+  }
 
   constructor(fileName, file) {
     super();
@@ -31,9 +39,24 @@ class ImageElement extends Observer {
     this.cropBoxData = data
   }
 
+  setContainerData(data) {
+    this.containerData = data
+  }
+
   setSize(width, height) {
     this.width = width
     this.height = height
+  }
+
+  setInputData(key, value) {
+    this.inputData = {
+      ...this.inputData,
+      [key]: value
+    }
+  }
+
+  getSize() {
+    return { width: this.width, height: this.height }
   }
 }
 

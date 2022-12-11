@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Image;
 
 use App\Http\Controllers\Controller;
+use App\Models\Share;
 use App\Services\Image\ImageConstructorService;
 use App\Utils\Image\DTO\ImageParametersDTO;
 use Illuminate\Http\Request;
@@ -91,5 +92,11 @@ class ImageController extends Controller
     public function download($fileName)
     {
         return view('components.image.download');
+    }
+
+    public function share(string $uuid)
+    {
+        $shareFile = Share::where('uuid', $uuid)->first();
+        return view('components.image.share', compact('shareFile'));
     }
 }

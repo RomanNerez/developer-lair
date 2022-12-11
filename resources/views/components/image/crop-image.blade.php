@@ -143,12 +143,12 @@
                             <input type="number" class="form-control" name="height" id="height" data-action="height">
                         </div>
                         <div class="col-12">
-                            <label for="x">X</label>
-                            <input type="number" class="form-control" name="x" id="x" data-action="x">
+                            <label for="left">X</label>
+                            <input type="number" class="form-control" name="left" id="left" data-action="left">
                         </div>
                         <div class="col-12">
-                            <label for="y">Y</label>
-                            <input type="number" class="form-control" name="y" id="y" data-action="y">
+                            <label for="top">Y</label>
+                            <input type="number" class="form-control" name="top" id="top" data-action="top">
                         </div>
                     </div>
                 </div>

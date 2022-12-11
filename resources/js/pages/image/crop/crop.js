@@ -7,6 +7,7 @@ import 'cropperjs/dist/cropper.min.css'
 import '@splidejs/splide/dist/css/splide.min.css';
 import Splide from '@splidejs/splide';
 import getSlide from "./templates/slide-item";
+import axios from "axios";
 
 (function () {
   const uploadInput = $('#upload_input'),
@@ -22,17 +23,23 @@ import getSlide from "./templates/slide-item";
   const controlSettings = new ControlSettings(controlNavbar)
 
   controlSettings.on(ON_CHANGE_INPUTS, function (event) {
-    cropperImage.setCropBoxData({ [event.action]: event.value })
+    const inputValue = event.value
+    const cropperValue = event.valueCropper
+    cropperImage.setCropBoxData({ [event.action]: cropperValue })
+    const data = cropperImage.getCropBoxData()
+    if (inputValue >= 0 && (cropperValue <= data[event.action])) {
+      delete data[event.action]
+    }
+
+    controlSettings.setInputData(data)
   })
 
   cropperImage.on(ON_CROP_MOVE, function () {
-    const { width, height, top, left } = cropperImage.getCropBoxData()
-    controlSettings.setInputData({ width, height, y: top, x: left})
+    controlSettings.setInputData(cropperImage.getCropBoxData())
   })
 
   cropperImage.on(ON_READY_CROPPER, function () {
-    const { width, height, top, left } = cropperImage.getCropBoxData()
-    controlSettings.setInputData({ width, height, y: top, x: left})
+    controlSettings.setInputData(cropperImage.getCropBoxData())
   })
 
   ImageList.on(ON_ADD_IMAGE, function (image) {
@@ -64,6 +71,7 @@ import getSlide from "./templates/slide-item";
       this.initOnClickSlide()
 
       cropperImage.setImage(ImageList.getFirstImage())
+      controlSettings.setImage(ImageList.getFirstImage())
 
       new Splide( '.splide', {
         perPage: 3,
@@ -76,14 +84,27 @@ import getSlide from "./templates/slide-item";
       this.toggleSections()
     },
 
-    onPushImages(event) {
-      console.log(ImageList)
+    async onPushImages(event) {
+      const formData = new FormData()
+      ImageList.images.forEach((image, index) => {
+
+        formData.append(`images[${index}][file]`, image.file)
+        formData.append(`images[${index}][width]`, image.inputData.width || image.width)
+        formData.append(`images[${index}][height]`, image.inputData.height || image.height)
+        formData.append(`images[${index}][x]`, image.inputData.left)
+        formData.append(`images[${index}][y]`, image.inputData.top)
+      })
+
+      const { data } = await axios.post('/image/crop/cropping', formData)
+      window.location = `${window.location.origin}/image/share/${data.uuid}`
     },
 
     initOnClickSlide() {
       $('li', splideList).on('click', function () {
         const imageId = parseInt($(this).data('image-id'))
-        cropperImage.setImage(ImageList.getImageById(imageId))
+        const imageElement = ImageList.getImageById(imageId)
+        cropperImage.setImage(imageElement)
+        controlSettings.setImage(imageElement)
       })
     },
 
