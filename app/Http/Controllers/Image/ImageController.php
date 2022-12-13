@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Image;
 use App\Http\Controllers\Controller;
 use App\Models\Share;
 use App\Services\Image\ImageConstructorService;
+use App\Services\Image\ImageService;
+use App\Services\ZipArchiveService;
 use App\Utils\Image\DTO\ImageParametersDTO;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ImageController extends Controller
 {
@@ -16,11 +19,27 @@ class ImageController extends Controller
     private $imageConstructorService;
 
     /**
+     * @var ImageService
+     */
+    private $imageService;
+
+    /**
+     * @var ZipArchiveService
+     */
+    private $zipArchiveService;
+
+    /**
      * @param ImageConstructorService $imageConstructorService
      */
-    public function __construct(ImageConstructorService $imageConstructorService)
+    public function __construct(
+        ImageConstructorService $imageConstructorService,
+        ImageService $imageService,
+        ZipArchiveService $zipArchiveService
+    )
     {
         $this->imageConstructorService = $imageConstructorService;
+        $this->imageService = $imageService;
+        $this->zipArchiveService = $zipArchiveService;
     }
 
     /**
@@ -98,5 +117,37 @@ class ImageController extends Controller
     {
         $shareFile = Share::where('uuid', $uuid)->first();
         return view('components.image.share', compact('shareFile'));
+    }
+
+    public function resizing(Request $request)
+    {
+        $images = $request->all()['images'];
+
+        $dataForZip = [];
+
+        foreach ($images as $image) {
+            $dataForZip[] = [
+                'fileName' => $image['file']->getClientOriginalName(),
+                'resource' => $this->imageService->resize(
+                    $image['file']->getRealPath(),
+                    $image['width'],
+                    $image['height'],
+                )
+            ];
+        }
+
+        $path = $this->zipArchiveService->createZip($dataForZip);
+
+        $uuid = Str::uuid();
+
+        Share::create([
+            'uuid' => $uuid,
+            'type' => 'image',
+            'file_name' => $path
+        ]);
+
+        return response()->json([
+            'uuid' => $uuid
+        ]);
     }
 }

@@ -26,6 +26,7 @@ Route::prefix('image')->namespace('Image')->group(function () {
     Route::get('/builder', 'ImageController@builder')->name('image-builder');
     Route::get('/compress', 'ImageController@compress')->name('image-compress');
     Route::get('/resize', 'ImageController@resize')->name('image-resize');
+    Route::post('/resize/resizing', 'ImageController@resizing')->name('image-resizing');
 
     Route::prefix('/crop')->group(function () {
         Route::get('/', 'CropImageController@index')->name('image-crop');

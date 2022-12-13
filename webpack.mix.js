@@ -20,4 +20,5 @@ mix.js('resources/js/common.js', 'public/js')
    .js('resources/js/admin/admin.js', 'public/js')
    .js('resources/js/pages/image/builder/builder.js', 'public/js/image')
    .js('resources/js/pages/image/rotate/rotate.js', 'public/js/image')
+   .js('resources/js/pages/image/resize/resize.js', 'public/js/image')
    .js('resources/js/pages/image/crop/crop.js', 'public/js/image');

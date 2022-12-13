@@ -7,5 +7,6 @@
     "/css/image/image-builder.css": "/css/image/image-builder.css",
     "/js/image/builder.js": "/js/image/builder.js",
     "/js/image/crop.js": "/js/image/crop.js",
+    "/js/image/resize.js": "/js/image/resize.js",
     "/js/image/rotate.js": "/js/image/rotate.js"
 }

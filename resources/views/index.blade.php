@@ -36,10 +36,10 @@
                             </div>
                         </li>
                     </ul>
-                </div>
-                <div class="form-inline my-2 my-lg-0">
-                    <a href="{{ route('login') }}" class="btn btn-outline-primary my-2 my-sm-0">Вход</a>
-                    <a href="{{ route('register') }}" class="btn btn-outline-info my-2 ml-2 my-sm-0">Регистрация</a>
+                    <div class="form-inline my-2 my-lg-0">
+                        <a href="{{ route('login') }}" class="btn btn-outline-primary my-2 my-sm-0">Вход</a>
+                        <a href="{{ route('register') }}" class="btn btn-outline-info my-2 ml-2 my-sm-0">Регистрация</a>
+                    </div>
                 </div>
             </nav>
         </div>

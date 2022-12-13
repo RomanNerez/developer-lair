@@ -45,4 +45,22 @@ class ImageService
 
         return $imagick->getImageBlob();
     }
+
+    /**
+     * @param string $filePath
+     * @param int $width
+     * @param int $height
+     * @return string
+     * @throws \ImagickException
+     */
+    public function resize(string $filePath, int $width, int $height): string
+    {
+        $imagick = new \Imagick($filePath);
+        $imagick->scaleImage(
+            $width,
+            $height
+        );
+
+        return $imagick->getImageBlob();
+    }
 }
