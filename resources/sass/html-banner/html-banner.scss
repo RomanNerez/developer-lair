@@ -1,0 +1,191 @@
+@import '~jquery-ui/themes/base/resizable.css';
+@import '~jquery-ui/themes/base/draggable.css';
+@import '~jquery-ui-rotatable/jquery.ui.rotatable.css';
+
+
+html, body, main {
+    width: 100%;
+    height: 100%
+}
+
+
+
+.container {
+    height: 100%;
+}
+
+.wrap-container {
+    height: 100%;
+}
+
+.canvas_wrap-container {
+    position: relative;
+    height: 67%;
+    overflow: hidden;
+    box-shadow: 0px 0px 35px 1px #00000017;
+
+    .canvas_banner-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background-image: url('../../images/bg.png');
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 99;
+            width: 100%;
+            height: 100%;
+            outline: 3000px solid rgb(242 242 242 / 49%);
+            pointer-events: none;
+        }
+
+        &.preview-active::after {
+            outline: 3000px solid rgb(242 242 242 / 100%);
+        }
+
+        .canvas_banner-items {
+            width: 100%;
+            height: 100%;
+    
+    
+            .object-item {
+                position: absolute !important;
+                box-sizing: border-box;
+                perspective-origin: center;
+
+                .ui-resizable-n,
+                .ui-resizable-e,
+                .ui-resizable-s,
+                .ui-resizable-w,
+                .ui-resizable-ne,
+                .ui-resizable-se,
+                .ui-resizable-sw,
+                .ui-resizable-nw {
+                    background-color: #000000;
+                    position: absolute;
+                    border-radius: 50%;
+                    width: 10px;
+                    height: 10px;
+                    border: 1px solid #ffffff;
+                }
+                .ui-resizable-n {
+                    top: -5px;
+                    left: 50%;
+                    margin-left: -5px; 
+                }
+                
+                .ui-resizable-e {
+                    top: 50%;
+                    right: -5px;
+                    margin-top: -5px; 
+                }
+                
+                .ui-resizable-s {
+                    bottom: -5px;
+                    left: 50%;
+                    margin-left: -5px; 
+                }
+                
+                .ui-resizable-w {
+                    top: 50%;
+                    left: -5px;
+                    margin-top: -5px; 
+                }
+                
+                .ui-resizable-ne {
+                    top: -5px;
+                    right: -5px;
+                }
+                
+                .ui-resizable-se {
+                    bottom: -5px;
+                    right: -5px; 
+                }
+                .ui-resizable-sw {
+                    bottom: -5px;
+                    left: -5px;
+                }
+                .ui-resizable-nw {
+                    top: -5px;
+                    left: -5px;
+                }
+    
+                .ui-rotatable-handle {
+                    position: absolute;
+                    margin-left: -8px;
+                    left: 50%;
+                    top: -30px;
+                }
+
+                .ui-resizable-n,
+                .ui-resizable-e,
+                .ui-resizable-s,
+                .ui-resizable-w,
+                .ui-resizable-ne,
+                .ui-resizable-se,
+                .ui-resizable-sw,
+                .ui-resizable-nw,
+                .ui-rotatable-handle {
+                    opacity: 0;
+                    pointer-events: none;
+                }
+
+                &.active {
+                    .ui-resizable-n,
+                    .ui-resizable-e,
+                    .ui-resizable-s,
+                    .ui-resizable-w,
+                    .ui-resizable-ne,
+                    .ui-resizable-se,
+                    .ui-resizable-sw,
+                    .ui-resizable-nw,
+                    .ui-rotatable-handle {
+                        opacity: 1;
+                        pointer-events: all;
+                    }
+                }
+            }   
+        }
+    }
+
+    .canvas_banner-item-settings {
+        position: absolute;
+        z-index: 999;
+        border-radius: 10px;
+        background-color: #191919;
+
+        .canvas_banner-item-settings-content {
+            position: relative;
+
+            .action {
+                padding: 10px 15px;
+                display: inline-block;
+                color: #ffffff;
+                cursor: pointer;
+            }
+            .action.draggable {
+                cursor: move;
+            }
+        }
+    }
+}
+
+.banner-timeline {
+    margin-top: 15px;
+    width: 100%;
+    height: 300px;
+    border: 1px solid #000000;
+    display: flex;
+    flex-direction: column;
+
+
+    .timeline-content {
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+}

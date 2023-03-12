@@ -17,6 +17,10 @@ header {
   left: auto;
 }
 
+main {
+  margin-top: 56px;
+}
+
 footer{
   position: relative;
   background: #39393a;
@@ -190,7 +194,16 @@ footer .bottom-details .bottom_text{
   margin-right: 10px;
 }
 
-
+@media (max-width: 991px) {
+  #navbarSupportedContent .open-dropdown-hover  div.dropdown-hover {
+    display: block;
+    border: none;
+    padding: 0;
+    a {
+      padding-left: 0;
+    }
+  }
+}
 
 
 

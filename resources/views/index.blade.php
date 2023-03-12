@@ -28,12 +28,16 @@
                                 <a class="nav-link" href="{{route('image')}}">Изображения</a>
                                 <div class="dropdown-menu dropdown-hover">
                                     <a class="dropdown-item" href="{{ route('image-builder') }}">Конструктор изображений</a>
+                                    <a class="dropdown-item" href="{{ route('generate-meme') }}">Генерация мемов</a>
                                     <a class="dropdown-item" href="{{ route('image-compress') }}">Сжать изображение</a>
                                     <a class="dropdown-item" href="{{ route('image-resize') }}">Изменить размер изображения</a>
                                     <a class="dropdown-item" href="{{ route('image-crop') }}">Обрезать изображения</a>
                                     <a class="dropdown-item" href="{{ route('image-rotate') }}">Повернуть изображение</a>
                                 </div>
                             </div>
+                            <li>
+                                <a class="nav-link" href="{{route('html-banner')}}">Html Banner Генератор</a>
+                            </li>
                         </li>
                     </ul>
                     <div class="form-inline my-2 my-lg-0">
@@ -45,7 +49,9 @@
         </div>
     </header>
 
-    @yield('content')
+    <main>
+        @yield('content')
+    </main>
 
     <footer>
         <div class="content container">

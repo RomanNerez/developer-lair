@@ -5,8 +5,11 @@
     "/css/admin.css": "/css/admin.css",
     "/css/image/image.css": "/css/image/image.css",
     "/css/image/image-builder.css": "/css/image/image-builder.css",
+    "/css/html-banner/html-banner.css": "/css/html-banner/html-banner.css",
+    "/js/html-banner/html-banner.js": "/js/html-banner/html-banner.js",
     "/js/image/builder.js": "/js/image/builder.js",
     "/js/image/crop.js": "/js/image/crop.js",
+    "/js/image/generate-meme.js": "/js/image/generate-meme.js",
     "/js/image/resize.js": "/js/image/resize.js",
     "/js/image/rotate.js": "/js/image/rotate.js"
 }

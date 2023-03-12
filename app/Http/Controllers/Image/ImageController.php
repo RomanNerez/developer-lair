@@ -150,4 +150,9 @@ class ImageController extends Controller
             'uuid' => $uuid
         ]);
     }
+
+    public function generateMeme()
+    {
+        return view('components.image.generate-meme');
+    }
 }

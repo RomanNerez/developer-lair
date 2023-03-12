@@ -21,9 +21,14 @@ Route::get('/mock-data', function () {
     return view('components.mockdata');
 })->name('mock-data');
 
+Route::prefix('html-banner')->namespace('HtmlBanner')->group(function () {
+    Route::get('/', 'HtmlBannerController@index')->name('html-banner');
+});
+
 Route::prefix('image')->namespace('Image')->group(function () {
     Route::get('/', 'ImageController@index')->name('image');
     Route::get('/builder', 'ImageController@builder')->name('image-builder');
+    Route::get('/generate-meme', 'ImageController@generateMeme')->name('generate-meme');
     Route::get('/compress', 'ImageController@compress')->name('image-compress');
     Route::get('/resize', 'ImageController@resize')->name('image-resize');
     Route::post('/resize/resizing', 'ImageController@resizing')->name('image-resizing');

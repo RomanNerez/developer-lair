@@ -1,0 +1,283 @@
+/*!
+ * jQuery UI Resizable 1.13.2
+ * http://jqueryui.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+.ui-resizable {
+	position: relative;
+}
+.ui-resizable-handle {
+	position: absolute;
+	font-size: 0.1px;
+	display: block;
+	touch-action: none;
+}
+.ui-resizable-disabled .ui-resizable-handle,
+.ui-resizable-autohide .ui-resizable-handle {
+	display: none;
+}
+.ui-resizable-n {
+	cursor: n-resize;
+	height: 7px;
+	width: 100%;
+	top: -5px;
+	left: 0;
+}
+.ui-resizable-s {
+	cursor: s-resize;
+	height: 7px;
+	width: 100%;
+	bottom: -5px;
+	left: 0;
+}
+.ui-resizable-e {
+	cursor: e-resize;
+	width: 7px;
+	right: -5px;
+	top: 0;
+	height: 100%;
+}
+.ui-resizable-w {
+	cursor: w-resize;
+	width: 7px;
+	left: -5px;
+	top: 0;
+	height: 100%;
+}
+.ui-resizable-se {
+	cursor: se-resize;
+	width: 12px;
+	height: 12px;
+	right: 1px;
+	bottom: 1px;
+}
+.ui-resizable-sw {
+	cursor: sw-resize;
+	width: 9px;
+	height: 9px;
+	left: -5px;
+	bottom: -5px;
+}
+.ui-resizable-nw {
+	cursor: nw-resize;
+	width: 9px;
+	height: 9px;
+	left: -5px;
+	top: -5px;
+}
+.ui-resizable-ne {
+	cursor: ne-resize;
+	width: 9px;
+	height: 9px;
+	right: -5px;
+	top: -5px;
+}
+/*!
+ * jQuery UI Draggable 1.13.2
+ * http://jqueryui.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+.ui-draggable-handle {
+	touch-action: none;
+}
+.ui-rotatable-handle {
+    height: 16px;
+    width: 16px;
+    cursor: pointer;
+    background-image: url(/images/vendor/jquery-ui-rotatable/rotate.png?e7d61ae47d7eb9db9e16b19ef4673b54);
+    background-size: 100%;
+    left: 2px;
+    bottom: 2px;
+}html,
+body,
+main {
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  height: 100%;
+}
+
+.wrap-container {
+  height: 100%;
+}
+
+.canvas_wrap-container {
+  position: relative;
+  height: 67%;
+  overflow: hidden;
+  box-shadow: 0px 0px 35px 1px rgba(0, 0, 0, 0.0901960784);
+}
+
+.canvas_wrap-container .canvas_banner-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-image: url(/images/bg.png?d706d3577729b79843d99f7781761c7a);
+}
+
+.canvas_wrap-container .canvas_banner-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  outline: 3000px solid rgba(242, 242, 242, 0.49);
+  pointer-events: none;
+}
+
+.canvas_wrap-container .canvas_banner-container.preview-active::after {
+  outline: 3000px solid rgb(242, 242, 242);
+}
+
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items {
+  width: 100%;
+  height: 100%;
+}
+
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item {
+  position: absolute !important;
+  box-sizing: border-box;
+  perspective-origin: center;
+}
+
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-n,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-e,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-s,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-w,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-ne,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-se,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-sw,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-nw {
+  background-color: #000000;
+  position: absolute;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  border: 1px solid #ffffff;
+}
+
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-n {
+  top: -5px;
+  left: 50%;
+  margin-left: -5px;
+}
+
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-e {
+  top: 50%;
+  right: -5px;
+  margin-top: -5px;
+}
+
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-s {
+  bottom: -5px;
+  left: 50%;
+  margin-left: -5px;
+}
+
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-w {
+  top: 50%;
+  left: -5px;
+  margin-top: -5px;
+}
+
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-ne {
+  top: -5px;
+  right: -5px;
+}
+
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-se {
+  bottom: -5px;
+  right: -5px;
+}
+
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-sw {
+  bottom: -5px;
+  left: -5px;
+}
+
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-nw {
+  top: -5px;
+  left: -5px;
+}
+
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-rotatable-handle {
+  position: absolute;
+  margin-left: -8px;
+  left: 50%;
+  top: -30px;
+}
+
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-n,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-e,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-s,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-w,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-ne,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-se,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-sw,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-resizable-nw,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item .ui-rotatable-handle {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item.active .ui-resizable-n,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item.active .ui-resizable-e,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item.active .ui-resizable-s,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item.active .ui-resizable-w,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item.active .ui-resizable-ne,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item.active .ui-resizable-se,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item.active .ui-resizable-sw,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item.active .ui-resizable-nw,
+.canvas_wrap-container .canvas_banner-container .canvas_banner-items .object-item.active .ui-rotatable-handle {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.canvas_wrap-container .canvas_banner-item-settings {
+  position: absolute;
+  z-index: 999;
+  border-radius: 10px;
+  background-color: #191919;
+}
+
+.canvas_wrap-container .canvas_banner-item-settings .canvas_banner-item-settings-content {
+  position: relative;
+}
+
+.canvas_wrap-container .canvas_banner-item-settings .canvas_banner-item-settings-content .action {
+  padding: 10px 15px;
+  display: inline-block;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.canvas_wrap-container .canvas_banner-item-settings .canvas_banner-item-settings-content .action.draggable {
+  cursor: move;
+}
+
+.banner-timeline {
+  margin-top: 15px;
+  width: 100%;
+  height: 300px;
+  border: 1px solid #000000;
+  display: flex;
+  flex-direction: column;
+}
+
+.banner-timeline .timeline-content {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+

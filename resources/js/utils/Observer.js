@@ -1,24 +1,46 @@
-class Observer {
+export default class Observer {
   events = {}
 
-  dispatch(event, data) {
-    if (!this.events[event]) return
-
-    this.events[event].forEach(callback => callback(data))
+  _checkCallback(callback) {
+    if (typeof callback !== 'function') {
+      throw new Error('Callback must be a function type')
+    }
   }
 
-  on(event, callback) {
+  _addEvent(event, callback) {
     if (!this.events[event]) this.events[event] = []
-    if (typeof callback !== 'function') {
-      return
-    }
-
     this.events[event].push(callback)
   }
 
-  off(event) {
-    delete this.events[event]
+  on(event, callback) {
+
+    if (typeof event === 'object' && !Array.isArray(event)) {
+      for (let key in event) {
+        this._checkCallback(event[key])
+        this._addEvent(key, event[key])
+      }
+    } else {
+      this._checkCallback(callback)
+      this._addEvent(event, callback)
+    }
+
+    return this
+  }
+
+  off(event, callback) {
+    if (!this.events[event]) return this
+    
+    this.events[event] = this.events[event].filter(
+      (call) => call.toString() !== callback.toString()
+    )
+
+    return this
+  }
+
+  dispatch(event, data) {
+    if (!this.events[event]) return
+    this.events[event].forEach((callback) => {
+      callback(data)
+    })
   }
 }
-
-export default Observer
